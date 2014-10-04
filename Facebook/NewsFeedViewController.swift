@@ -106,7 +106,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
               
               
                 copyImageViewToSegue.frame.size.width = 320
-                copyImageViewToSegue.frame.size.height = 320 * (self.imageViewToSegue.image.size.height / self.imageViewToSegue.image.size.width)
+                //copyImageViewToSegue.frame.size.height = 320 * (self.imageViewToSegue.image.size.height / self.imageViewToSegue.image.size.width)
                 copyImageViewToSegue.center.x = 320 / 2
                 copyImageViewToSegue.center.y = 568 / 2
                 toViewController.view.alpha = 1
