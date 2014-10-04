@@ -80,13 +80,13 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
    
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        println("animating transition")
         var containerView = transitionContext.containerView()
         var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         
         
         if (isPresenting) {
+            
             
             
             
@@ -117,38 +117,61 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             }
         } else {
           
+           
+            /*
+            
+            var photoViewController = fromViewController as PhotoViewController
+            var feedViewController = toViewController as NewsFeedViewController
+            
+            var copyImageViewToSegue = UIImageView()
+            copyImageViewToSegue.image = photoViewController.image
+            
             var window = UIApplication.sharedApplication().keyWindow
-          
+            containerView.addSubview(photoViewController.view)
+            window.addSubview(copyImageViewToSegue)
+            
+            feedViewController.view.alpha = 0
+            photoViewController.view.alpha = 0
+            */
+            
+            
+            var window = UIApplication.sharedApplication().keyWindow
             var copyImageViewToSegue = UIImageView()
             copyImageViewToSegue.clipsToBounds = true
             copyImageViewToSegue.image = imageViewToSegue.image
             copyImageViewToSegue.contentMode = UIViewContentMode.ScaleAspectFill
-            window.addSubview(copyImageViewToSegue)
-            containerView.addSubview(fromViewController.view)
-            toViewController.view.alpha = 0
-            fromViewController.view.alpha = 0
-
-          
+           
+            
             copyImageViewToSegue.frame.size.width = 320
             copyImageViewToSegue.frame.size.height = 320 * (copyImageViewToSegue.image!.size.height / copyImageViewToSegue.image!.size.width)
             copyImageViewToSegue.center.x = 320 / 2
             copyImageViewToSegue.center.y = 568 / 2
             
+            containerView.addSubview(fromViewController.view)
+            window.addSubview(copyImageViewToSegue)
+            
+            toViewController.view.alpha = 0
+            fromViewController.view.alpha = 0
+            
+            
+            
             
             UIView.animateWithDuration(0.4, animations: { () -> Void in
                 
-            copyImageViewToSegue.frame = window.convertRect(self.imageViewToSegue.frame, fromView: self.scrollView)
-         
+                copyImageViewToSegue.frame = window.convertRect(self.imageViewToSegue.frame, fromView: self.scrollView)
+                
                 toViewController.view.alpha = 1
-             
+                //   feedViewController.view.alpha = 1
             
-                println("false")
                 
                 }) { (finished: Bool) -> Void in
                     transitionContext.completeTransition(true)
+                    
                     fromViewController.view.removeFromSuperview()
+                    //  photoViewController.view.removeFromSuperview()
+                    
                     copyImageViewToSegue.removeFromSuperview()
-                    println("done")
+                   
                    
             }
         }

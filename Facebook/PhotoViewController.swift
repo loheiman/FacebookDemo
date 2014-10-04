@@ -71,8 +71,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         actionsPanel.alpha = buttonAlpha
         scrollView.backgroundColor = UIColor(white: 0, alpha: CGFloat(convertValue(offset, r1Min: 0, r1Max: -100, r2Min: 1, r2Max: 0.5)))
   
-
-        print("running!")
         
     }
     
