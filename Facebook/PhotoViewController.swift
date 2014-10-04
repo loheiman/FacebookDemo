@@ -106,7 +106,9 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
 
 
     
-    
+    func viewForZoomingInScrollView(scrollView: UIScrollView!) -> UIView! {
+        return photoImageView
+    }
     
     
     
