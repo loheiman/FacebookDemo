@@ -14,6 +14,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     @IBOutlet weak var feedImageView: UIImageView!
     var imageViewToSegue : UIImageView!
     var isPresenting: Bool = true
+    var offset: Float!
     
     
     override func viewDidLoad() {
@@ -87,21 +88,25 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         
         if (isPresenting) {
             
+            
+            
             var window = UIApplication.sharedApplication().keyWindow
             var frame = window.convertRect(imageViewToSegue.frame, fromView: scrollView)
             var copyImageViewToSegue = UIImageView(frame: frame)
-            copyImageViewToSegue.clipsToBounds = true
+            //copyImageViewToSegue.clipsToBounds = true
             copyImageViewToSegue.image = imageViewToSegue.image
-            copyImageViewToSegue.contentMode = UIViewContentMode.ScaleAspectFit
+          //  copyImageViewToSegue.contentMode = UIViewContentMode.ScaleAspectFit
             window.addSubview(copyImageViewToSegue)
             containerView.addSubview(toViewController.view)
             toViewController.view.alpha = 0
-            var scalefactor = 320 / copyImageViewToSegue.frame.width
-        
+            
             
             UIView.animateWithDuration(0.4, animations: { () -> Void in
             
-                copyImageViewToSegue.transform = CGAffineTransformMakeScale(scalefactor, scalefactor)
+              
+              
+                copyImageViewToSegue.frame.size.width = 320
+                copyImageViewToSegue.frame.size.height = 320 * (self.imageViewToSegue.image.size.height / self.imageViewToSegue.image.size.width)
                 copyImageViewToSegue.center.x = 320 / 2
                 copyImageViewToSegue.center.y = 568 / 2
                 toViewController.view.alpha = 1
@@ -113,20 +118,28 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             }
         } else {
           
-            
-            /*
-            
             var window = UIApplication.sharedApplication().keyWindow
-            var frame = window.convertRect(imageViewToSegue.frame, fromView: scrollView)
-            var copyImageViewToSegue = UIImageView(frame: frame)
+           // var frame = window.convertRect(imageViewToSegue.frame, fromView: scrollView)
+            var copyImageViewToSegue = UIImageView()
+            copyImageViewToSegue.clipsToBounds = true
             copyImageViewToSegue.image = imageViewToSegue.image
+            copyImageViewToSegue.contentMode = UIViewContentMode.ScaleAspectFit
             window.addSubview(copyImageViewToSegue)
-            containerView.addSubview(toViewController.view)
-        
-
-            */
+            containerView.addSubview(fromViewController.view)
+            toViewController.view.alpha = 0
+            var scalefactor = 320 / copyImageViewToSegue.frame.width
+            copyImageViewToSegue.frame.size = CGSize(width: 320, height: 568)
             
+ 
+          
+         //   copyImageViewToSegue.center.y += CGFloat(offset)
+            
+                      
             UIView.animateWithDuration(0.4, animations: { () -> Void in
+                
+            copyImageViewToSegue.frame = window.convertRect(self.imageViewToSegue.frame, fromView: self.scrollView)
+           
+            
                
             toViewController.view.alpha = 1
             fromViewController.view.alpha = 0
@@ -135,11 +148,14 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                 }) { (finished: Bool) -> Void in
                     transitionContext.completeTransition(true)
                     fromViewController.view.removeFromSuperview()
+                    copyImageViewToSegue.removeFromSuperview()
                     println("done")
                    
             }
         }
     }
+    
+    
     
     
 }

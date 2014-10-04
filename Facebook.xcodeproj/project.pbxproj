@@ -96,7 +96,6 @@
 				42167674198EAAC6008CCBC3 /* View Controllers */,
 				42167655198E3220008CCBC3 /* AppDelegate.swift */,
 				42167659198E3220008CCBC3 /* Main.storyboard */,
-				5C81E80A19DE682100D90DAB /* PhotoViewController.swift */,
 				4216765C198E3220008CCBC3 /* Images.xcassets */,
 				42167653198E3220008CCBC3 /* Supporting Files */,
 			);
@@ -131,6 +130,7 @@
 		42167674198EAAC6008CCBC3 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5C81E80A19DE682100D90DAB /* PhotoViewController.swift */,
 				42167679198ECE88008CCBC3 /* NewsFeedViewController.swift */,
 				42167677198ECE0E008CCBC3 /* RequestsViewController.swift */,
 				429277A1198F35B600E19641 /* MessagesViewController.swift */,

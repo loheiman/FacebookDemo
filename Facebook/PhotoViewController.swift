@@ -27,7 +27,12 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         scrollView.backgroundColor = UIColor(white: 0, alpha: 1)
         
         // scrollView.contentSize = photoImageView.frame.size
-        //  photoImageView.hidden = true
+        photoImageView.hidden = true
+    }
+    
+    override func viewDidAppear(animate: Bool) {
+    photoImageView.hidden = false
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,11 +65,14 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView!) {
         // This method is called as the user scrolls
         offset = Float(scrollView.contentOffset.y)
-        println(offset)
+        
         var buttonAlpha = CGFloat(convertValue(offset, r1Min: 0, r1Max: -60, r2Min: 1, r2Max: 0))
         doneButton.alpha = buttonAlpha
         actionsPanel.alpha = buttonAlpha
-        scrollView.backgroundColor = UIColor(white: 0, alpha: buttonAlpha)
+        scrollView.backgroundColor = UIColor(white: 0, alpha: CGFloat(convertValue(offset, r1Min: 0, r1Max: -150, r2Min: 1, r2Max: 0.2)))
+  
+
+        print("running!")
         
     }
     
@@ -75,8 +83,10 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidEndDragging(scrollView: UIScrollView!,
         willDecelerate decelerate: Bool) {
             // This method is called right as the user lifts their finger
-            if offset < -100 {
+            if offset < -70 {
                 dismissViewControllerAnimated(true , completion: nil)
+              //  NewsFeedViewController.offset = self.offset
+                
             }
             
     }
@@ -87,6 +97,16 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     
     
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        println("prepare for segue")
+        //passing images
+        var destinationViewController = segue.destinationViewController as NewsFeedViewController
+        destinationViewController.offset = self.offset
+        
+        
+    }
+
+
     
     
     
