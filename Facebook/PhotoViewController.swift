@@ -172,7 +172,11 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
             
         }
-        var location = sender.locationInView(view)
+        
+        else {
+            var location = sender.locationInView(view)
+            self.scrollView.zoomToRect(CGRect(x: location.x, y: location.y, width: 50, height: 50), animated: true)
+        }
         
     }
     
